@@ -1,0 +1,4 @@
+git clone git.server:git/cheetah/cansi-pattern-first-class-adt.git
+git clone git.server:git/cheetah/cansi-pattern-state.git
+git clone git.server:git/cheetah/cansi-pattern-strategy.git
+git clone git.server:git/cheetah/cansi-pattern-state-loop.git

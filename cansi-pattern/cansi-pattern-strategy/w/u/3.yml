@@ -1,0 +1,24 @@
+adt: { 'name':            customer,
+       'lower':           customer,
+       'title':           customer,
+       'id':              id,
+       'pointer_suffix':  ptr,
+       'pool':            memorypool_,
+       'class':           [
+                               {'name':  order,
+                                'lower': order,
+                                'title': order,
+                               },
+                               {'name':  address,
+                                'lower': address,
+                                'title': address,
+                               }
+                          ]
+     }
+
+servers:
+- dns.server:        ççç.ççç.ç.çç
+- registry.local:    ççç.ççç.ç.çç
+- docker.server:     ççç.ççç.ç.çç
+- chef-server:       ççç.ççç.ç.çç
+- dev.server:        ççç.ççç.ç.çç

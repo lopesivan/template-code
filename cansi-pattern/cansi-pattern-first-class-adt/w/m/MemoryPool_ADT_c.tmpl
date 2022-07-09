@@ -1,0 +1,72 @@
+\#include "${adt.name}.h"
+#if len($adt.class) > 0
+#for i in range(0, len($adt.class)):
+//\#include "${adt.class[i].name}.h"
+#end for
+#end if
+\#include <stdlib.h>
+\#include <stdio.h>
+
+struct ${adt.name.capitalize()}
+{
+#for i in range(0, len($adt.struct)):
+    ${adt.struct[i].type} ${adt.struct[i].name};
+#end for
+};
+
+\#define MAX_NO_OF_${adt.name.upper()}S 42
+
+static struct ${adt.name.capitalize()} objectPool[MAX_NO_OF_${adt.name.upper()}S];
+static size_t numberOfObjects = 0;
+
+${adt.name.capitalize()}${adt.ptr} create${adt.name.capitalize()}#slurp
+#if len($adt.ctor) > 1
+(#slurp
+#for i in range(0, len($adt.ctor)-1):
+${adt.ctor[i].type} ${adt.ctor[i].name}, #slurp
+#end for
+${adt.ctor[-1].type} ${adt.ctor[-1].name}#slurp
+)
+#else
+#if len($adt.ctor) == 0
+()
+#else
+    (${adt.ctor[0].type} ${adt.ctor[0].name})
+#end if
+#end if
+{
+    ${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()} = NULL;
+
+    if (numberOfObjects < MAX_NO_OF_${adt.name.upper()}S)
+    {
+        ${adt.name.lower()} = &objectPool[numberOfObjects++];
+        /* Initialize the object... */
+        /* Initialize each field in the ${adt.name.lower()}... */
+        ${adt.name.lower()}->${adt.ctor[0].name} = ${adt.ctor[0].name};
+        ${adt.name.lower()}->${adt.ctor[1].name} = *${adt.ctor[1].name};
+    }
+    return ${adt.name.lower()};
+}
+
+
+#if len($adt.ctor) > 1
+void show${adt.name.capitalize()}#slurp
+(${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()})
+{
+    printf ("Name:\t%s\nCity:\t%s\nStreet:\t%s\n",
+        ${adt.name.lower()}->${adt.ctor[0].name},
+        ${adt.name.lower()}->${adt.ctor[1].name}.${adt.class[0].struct[0].name},
+        ${adt.name.lower()}->${adt.ctor[1].name}.${adt.class[0].struct[1].name})
+    ;
+}
+#end if
+
+void destroy${adt.name.capitalize()}#slurp
+(${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()})
+{
+    /*
+      In case de-allocation is needed, an array will still do, but a more
+      sophisticated method for keeping track of "allocated" objects will be
+      needed.  However, such an algorithm is outside the scope of this book.
+    */
+}

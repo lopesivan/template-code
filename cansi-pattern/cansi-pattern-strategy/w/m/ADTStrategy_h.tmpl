@@ -1,0 +1,13 @@
+#ifndef ${adt.name.upper()}_STRATEGY_H
+#define ${adt.name.upper()}_STRATEGY_H
+
+typedef ${strategy.out} (*${adt.name.capitalize()}${strategy.name.capitalize()}Strategy)
+#if len($strategy.in) > 1:
+#for j in range(0, len($strategy.in)-1):
+${strategy.in[j]}, #slurp
+#end for
+${strategy.in[-1]});
+#end if
+
+#endif
+

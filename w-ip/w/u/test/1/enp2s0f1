@@ -1,0 +1,8 @@
+auto enp2s0f1
+iface enp2s0f1 inet static
+address 192.168.2.44
+netmask 255.255.255.0
+network 192.168.2.0
+gateway 192.168.2.1
+dns-nameservers 192.168.2.40
+

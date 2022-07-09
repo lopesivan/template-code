@@ -1,0 +1,168 @@
+#encoding UTF-8
+#compiler commentStartToken = '@%%%'
+/*
+ * args.c - $program.name
+ * Copyright (C) $program.year $program.author
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+\#include <stdlib.h>
+\#include <stdio.h>
+\#include <getopt.h>
+
+\#include "args.h"
+
+#for $i in $program.commands.defaults:
+#if $i.name == "verbose"
+bool verbose = $i.default;
+#end if
+#if $i.name == "debug"
+bool debug = $i.default;
+#end if
+#end for
+
+#for $i in $program.commands.flags:
+bool $i.name = $i.default;
+#end for
+
+void print_help(void)
+{
+    printf("\
+Usage: $program.name [OPTION]...\n\
+@%%%$program.description.translate(str.maketrans({"-":  r"\-", "]":  r"\]", "\\": r"\\", "^":  r"\^", "$":  r"\$", "*":  r"\*", ".":  r"\."}))\n\
+$program.description.translate($program.description.maketrans({'"':  r'\"'}))\n\
+@%%% Imprimindo uma lista
+#for $i in $program.commands.flags:
+#set s = "-%s, --%-10s\t%s\\n\\" %($i.short, $i.long, $i.description)
+  $s
+#end for
+#for $i in $program.commands.defaults:
+#set s = "-%s, --%-8s\t%s\\n\\" %($i.short, $i.long, $i.description)
+  $s
+#end for
+\n\
+Report bugs to: <http://github.com/${program.github}/$program.name/issues>\n\
+$program.name home page: <http://github.com/${program.github}/$program.name>\n");
+    if (debug == true)
+    {
+        printf("DEBUG ON\n");
+        if (verbose == true)
+            printf("VERBOSE ON\n");
+        else
+            printf("VERBOSE OFF\n");
+#for $i in $program.commands.flags:
+        if ($i.name == true)
+            printf("$i.name.upper() ON\n");
+        else
+            printf("$i.name.upper() OFF\n");
+#end for
+    }
+
+}
+
+void print_version(void)
+{
+    printf("\
+$program.name $version\n\
+Copyright (C) $program.year $program.author\n\
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n\
+This is free software: you are free to change and redistribute it.\n\
+There is NO WARRANTY, to the extent permitted by law.\n");
+}
+
+void arguments(int argc, char **argv)
+{
+    int c;
+    while (1)
+    {
+        static struct option long_options[] =
+        {
+@%%% Imprimindo uma lista
+#for $i in $program.commands.defaults:
+#set s = "{\"%s\",  no_argument,    NULL,   '%s'}," %($i.long, $i.short)
+            $s
+#end for
+#for $i in $program.commands.flags:
+#set s = "{\"%s\",  no_argument,    NULL,   '%s'}," %($i.long, $i.short)
+            $s
+#end for
+            {NULL, 0, NULL, 0}
+        };
+
+        /* getopt_long stores the option index here. */
+        int option_index = 0;
+
+#set s =""
+#for $i in $program.commands.defaults:
+#set s += $i.short
+#end for
+#for $i in $program.commands.flags:
+#set s += $i.short
+#end for
+        c = getopt_long (argc, argv, "$s",
+        long_options, &option_index);
+
+        /* Detect the end of the options. */
+        if (c == -1)
+            break;
+
+        switch (c)
+        {
+#for $i in $program.commands.defaults:
+@%%% =========================================================================
+#if $i.name == "verbose"
+            case '$i.short':
+                verbose = true;
+                continue;
+#end if
+@%%% =========================================================================
+#if $i.name == "debug"
+            case '$i.short':
+                debug = true;
+                continue;
+#end if
+@%%% =========================================================================
+#if $i.name == "help"
+            case '$i.short':
+                print_help();
+                exit (EXIT_SUCCESS);
+                break;
+#end if
+@%%% =========================================================================
+#if $i.name == "version"
+            case '$i.short':
+                print_version();
+                exit (EXIT_SUCCESS);
+                break;
+#end if
+#end for
+@%%% =========================================================================
+#for $i in $program.commands.flags:
+            case '$i.short':
+            $i.name = $i.input;
+                continue;
+#end for
+@%%% =========================================================================
+            case '?':
+                /* getopt_long already printed an error message. */
+                break;
+
+            default:
+                abort ();
+        }
+     }
+
+}
+#compiler reset

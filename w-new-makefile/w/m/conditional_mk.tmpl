@@ -1,0 +1,23 @@
+MAKEFILE_CONFIG := Makefile.config
+
+ifeq (\$(filter \$(MAKECMDGOALS),config clean),)
+    ifeq (\$(strip \$(wildcard \$(MAKEFILE_CONFIG))),)
+        \$(error Config file '\$(MAKEFILE_CONFIG)' does not exist. Please, use 'make config' before)
+    else
+        ifneq (\$(MAKECMDGOALS),config)
+            include \$(MAKEFILE_CONFIG)
+        endif
+    endif
+endif
+
+.PHONY: all config clean
+
+all:
+	@echo \$(CONFIG)
+
+config:
+	@touch \$(MAKEFILE_CONFIG)
+	\$(shell echo CONFIG := Config done. > \$(MAKEFILE_CONFIG))
+
+clean:
+	@test -f \$(MAKEFILE_CONFIG) && rm \$(MAKEFILE_CONFIG) || true

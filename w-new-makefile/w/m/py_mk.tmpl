@@ -1,0 +1,22 @@
+main      = main.py
+scripts   = MyApp.py
+
+bitecode  = \$(scripts:.py=.pyc)
+
+PYTHON    = python
+
+checkfile =.pipeline_up_to_date
+
+\$(checkfile): \$(scripts)
+	${unicode.at}touch \$(checkfile)
+	\$(PYTHON) \$(scripts)
+
+default: \$(checkfile)
+
+main :
+	\$(PYTHON) \$${unicode.at}.py
+
+clean:
+	${unicode.at}rm -rf \$(bitecode)
+	${unicode.at}rm -rf \$(checkfile)
+	${unicode.at}rm -rf __pycache__

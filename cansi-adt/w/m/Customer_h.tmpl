@@ -1,0 +1,47 @@
+#encoding utf-8
+\#ifndef ${cmd.name.upper()}_H
+\#define ${cmd.name.upper()}_H
+
+#if len($cmd.include) > 0
+#for i in range(0, len($cmd.include)):
+\#include "${cmd.include[i].name}"
+#end for
+#end if
+
+/*
+A pointer to an incomplete type (hides the implementation details).
+*/
+typedef struct ${cmd.name}${cmd.suffix} *${cmd.name}${cmd.ptr};
+
+/*
+Create a ${cmd.name} and return a handle to it.
+*/
+${cmd.name}${cmd.ptr} create${cmd.name}#slurp
+#if len($cmd.ctor) > 1
+(#slurp
+#for i in range(0, len($cmd.ctor)-1):
+${cmd.ctor[i].type} ${cmd.ctor[i].name}, #slurp
+#end for
+${cmd.ctor[-1].type} ${cmd.ctor[-1].name});
+#else
+#if len($cmd.ctor) == 0
+();
+#else
+(${cmd.ctor[0].type} ${cmd.ctor[0].name});
+#end if
+#end if
+
+/*
+Destroy the given ${cmd.name} object.
+All handles to it will be invalidated.
+*/
+void destroy${cmd.name}(${cmd.name}${cmd.ptr} ${cmd.name.lower});
+
+/*
+Print the given ${cmd.name} object.
+*/
+#if len($cmd.ctor) > 1
+void display${cmd.name}#slurp
+(${cmd.name}${cmd.ptr} ${cmd.name.lower()});
+#end if
+\#endif

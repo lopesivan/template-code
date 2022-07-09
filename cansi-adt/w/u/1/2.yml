@@ -1,0 +1,48 @@
+adt: {
+     # Definições do adt
+     'name':         Customer,
+     'memory_pool':  MemoryPollCustomer,
+     'ptr':          Ptr,
+     'suffix':       _t,
+     'dir':          out,
+     'objects':      42,
+
+     # adt.h headers
+     'include': [
+        { 'name': Address.h },
+     ],
+
+     ### SOURCE
+     # adt.c - definição da struct que será ocultda
+     'struct': [
+          { 'type': const char*, 'name': name        },
+          { 'type': Address,     'name': address     },
+          { 'type': size_t ,     'name': noOfOrders  },
+          { 'type': Order,       'name': "orders[42]"},
+     ],
+
+     # interface do construtor
+     'ctor': [
+          { 'type': const char*,    'name': name     },
+          { 'type': const Address*, 'name': address  },
+     ],
+
+     #  Headers com definições das estruturas
+     'class': [
+                { 'name': Address,
+                  'struct': [
+                       { 'type': const char*, 'name': street },
+                       { 'type': const char*, 'name': city   },
+                  ],
+                  'include': [
+                  ],
+                },
+                { 'name': Order,
+                  'struct': [
+                       { 'type': unsigned long, 'name': orderId },
+                  ],
+                  'include': [
+                  ],
+                },
+     ]
+}

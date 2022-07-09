@@ -1,0 +1,3 @@
+[submodule "w/hello-world"]
+	path = w/hello-world
+	url = git@github.com:lopesivan/hello-world.git

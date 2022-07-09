@@ -1,0 +1,26 @@
+VERSION   = 0.1
+NAME      = ${cmd.name}
+
+include etc/rules/build.mk
+include etc/rules/tests.mk
+include etc/rules/run.mk
+
+install: install-\$(PROJECT)
+
+clean:
+	${unicode.at}-rm -rf \$(prefix)/bin/\$(PROJECT)
+	chmod -x exec
+	echo bash-it disable completion ${cmd.name}
+	rm /home/ivan/developer/bash-it/completion/available/${cmd.name}.completion.bash
+
+test-task-list:
+	${unicode.at}(ls tests/tasks/| sed -r 's/(^.+)_test.sh/make \1-task-test/')
+
+test-task:
+	ls tests/tasks/| sed -r 's/(^.+)_test.sh/make \1-task-test/'|sh
+test:
+	bang test
+
+test-clean:
+	${unicode.at}-rm tests/*.out
+

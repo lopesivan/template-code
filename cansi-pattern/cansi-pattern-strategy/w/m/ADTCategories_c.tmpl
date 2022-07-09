@@ -1,0 +1,22 @@
+\#include "${adt.name.capitalize()}Categories.h"
+
+/* In production code, I would definitely validate all input and
+   secure the calculations upon entry of each function... */
+
+#if len($strategy.categories) > 0
+#for i in range(0, len($strategy.categories)):
+${strategy.out} ${strategy.categories[i].name}${strategy.name.capitalize()}Strategy#slurp
+ (#slurp
+#if len($strategy.in) > 1
+#for j in range(0, len($strategy.in)-1):
+${strategy.in[j]},#slurp
+#end for
+${strategy.in[-1]})
+#else
+(${strategy.in[0]})
+#end if
+{
+    return ${strategy.categories[i].ret};
+}
+#end for
+#end if

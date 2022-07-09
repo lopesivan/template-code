@@ -1,0 +1,18 @@
+#encoding UTF-8
+#compiler commentStartToken = '//'
+
+// Imprimindo uma lista
+#for $i in $program.commands.defaults:
+	$i.short
+#end for
+
+  -$program.commands.defaults[0].short, --$program.commands.defaults[0].long	$program.commands.defaults[0].description\n\
+
+#for $i in $program.commands.defaults:
+#if $i.name == "verbose"
+  $i.short
+#end if
+#end for
+
+#compiler reset
+

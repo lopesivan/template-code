@@ -1,0 +1,115 @@
+#encoding utf-8
+\#include "${cmd.name}.h"
+#if len($cmd.class) > 0
+/*
+#for i in range(0, len($cmd.class)):
+\#include "${cmd.class[i].name}.h"
+#end for
+#end if
+*/
+\#include <stdlib.h>
+
+struct ${cmd.name}${cmd.suffix}
+{
+#for i in range(0, len($cmd.struct)):
+    ${cmd.struct[i].type} ${cmd.struct[i].name};
+#end for
+};
+
+\#ifdef NOMEMMORY
+\#define MAX_NO_OF_${cmd.name.upper()}S ${cmd.objects}
+
+static struct ${cmd.name} objectPool[MAX_NO_OF_${cmd.name.upper()}S];
+static size_t numberOfObjects = 0;
+
+
+${cmd.name}${cmd.ptr} create${cmd.name}#slurp
+#if len($cmd.ctor) > 1
+(#slurp
+#for i in range(0, len($cmd.ctor)-1):
+${cmd.ctor[i].type} ${cmd.ctor[i].name}, #slurp
+#end for
+${cmd.ctor[-1].type} ${cmd.ctor[-1].name}#slurp
+)
+#else
+#if len($cmd.ctor) == 0
+()
+#else
+    (${cmd.ctor[0].type} ${cmd.ctor[0].name})
+#end if
+#end if
+{
+    ${cmd.name}${cmd.ptr} ${cmd.name.lower()} = NULL;
+
+    if (numberOfObjects < MAX_NO_OF_${cmd.name.upper()}S)
+    {
+        customer = &objectPool[numberOfObjects++];
+        /* Initialize the object... */
+        /* Initialize each field in the ${cmd.name.lower()}... */
+#for i in range(0, len($cmd.ctor)-1):
+        ${cmd.name.lower()}->${cmd.ctor[i].name} = ${cmd.ctor[i].name};
+#end for
+        ${cmd.name.lower()}->${cmd.ctor[-1].name} = ${cmd.ctor[-1].name};
+    }
+
+    return ${cmd.name.lower()};
+}
+
+
+void destroy${cmd.name}#slurp
+(${cmd.name}${cmd.ptr} ${cmd.name.lower()})
+{
+    /* Perform clean-up of the ${cmd.name.lower()} internals, if necessary.
+    free (${cmd.name.lower()});
+    */
+}
+
+\#else
+
+${cmd.name}${cmd.ptr} create${cmd.name}#slurp
+#if len($cmd.ctor) > 1
+(#slurp
+#for i in range(0, len($cmd.ctor)-1):
+${cmd.ctor[i].type} ${cmd.ctor[i].name}, #slurp
+#end for
+${cmd.ctor[-1].type} ${cmd.ctor[-1].name}#slurp
+)
+#else
+#if len($cmd.ctor) == 0
+()
+#else
+    (${cmd.ctor[0].type} ${cmd.ctor[0].name})
+#end if
+#end if
+{
+    ${cmd.name}${cmd.ptr} ${cmd.name.lower()} = malloc (sizeof *${cmd.name.lower()});
+
+    if (NULL != ${cmd.name.lower()})
+    {
+        /* Initialize each field in the ${cmd.name.lower()}... */
+#for i in range(0, len($cmd.ctor)-1):
+        ${cmd.name.lower()}->${cmd.ctor[i].name} = ${cmd.ctor[i].name};
+#end for
+        ${cmd.name.lower()}->${cmd.ctor[-1].name} = ${cmd.ctor[-1].name};
+    }
+
+    return ${cmd.name.lower()};
+}
+
+
+void destroy${cmd.name}#slurp
+(${cmd.name}${cmd.ptr} ${cmd.name.lower()})
+{
+    /* Perform clean-up of the ${cmd.name.lower()} internals, if necessary. */
+    free (${cmd.name.lower()});
+}
+\#endif
+
+#if len($cmd.ctor) > 1
+void display${cmd.name}#slurp
+(${cmd.name}${cmd.ptr} ${cmd.name.lower()})
+{
+    printf ("%s\n", "Not implemented yet");
+}
+#end if
+

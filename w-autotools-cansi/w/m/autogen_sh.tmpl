@@ -1,0 +1,20 @@
+#encoding UTF-8
+#compiler commentStartToken = '//'
+// comment
+#compiler reset
+\#!/usr/bin/env sh
+
+\# if not exist path `m4' then create
+_d=m4
+test -d \$_d || mkdir \$_d
+
+\# if not exist path `build-aux' then create
+_d=build-aux
+test -d \$_d || mkdir \$_d
+
+autoreconf -i -v
+
+\#touch NEWS README AUTHORS ChangeLog COPYING
+\#autoreconf -i -v && ./configure && make
+
+exit 0

@@ -1,0 +1,31 @@
+{
+  "./.projections.json": { "type": "dit" },
+
+  "README.md": {
+    "type": "doc"
+  },
+
+  "CMakeLists.txt": {
+    "type": "ck"
+  },
+
+  "Makefile": {
+    "type": "mk"
+  },
+
+  "main.c": {
+    "type": "main"
+  },
+
+  "*.c": {
+    "type": "s",
+    "alternate": "{}.h"
+  },
+
+  "*.h": {
+    "type": "h",
+    "skeleton": "cansiheader",
+    "alternate": "{}.c",
+  }
+
+}

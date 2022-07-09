@@ -1,0 +1,38 @@
+adt: {
+     'name':         Customer,
+     'memory_pool':  MemoryPollCustomer,
+     'ptr':          Ptr,
+
+     'include': [
+        { 'name': Address.h },
+     ],
+
+     'struct': [
+          { 'type': const char*, 'name': name         },
+          { 'type': Address,     'name': address      },
+     ],
+
+     'ctor': [
+          { 'type': const char*, 'name': name       },
+          { 'type': const Address*, 'name': address },
+     ],
+
+     'class': [
+                { 'name': Address,
+                  'struct': [
+                       { 'type': const char*, 'name': street },
+                       { 'type': const char*, 'name': city   },
+                  ],
+                  'include': [
+                  ],
+                },
+                { 'name': Order,
+                  'struct': [
+                       { 'type': unsigned long, 'name': orderId },
+                  ],
+                  'include': [
+                  ],
+                },
+
+     ]
+}

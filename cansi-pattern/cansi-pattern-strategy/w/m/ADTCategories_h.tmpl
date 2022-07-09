@@ -1,0 +1,19 @@
+#ifndef ${adt.name.upper()}_CATEGORIES_H
+#define ${adt.name.upper()}_CATEGORIES_H
+
+#if len($strategy.categories) > 0
+#for i in range(0, len($strategy.categories)):
+${strategy.out} ${strategy.categories[i].name}${strategy.name.capitalize()}Strategy#slurp
+ (#slurp
+#if len($strategy.in) > 1:
+#for j in range(0, len($strategy.in)-1):
+${strategy.in[j]}, #slurp
+#end for
+${strategy.in[-1]});
+
+#else
+(${strategy.in[0]});
+
+#end if
+#end for
+#end if

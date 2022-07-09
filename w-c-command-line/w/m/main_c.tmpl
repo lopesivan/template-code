@@ -1,0 +1,54 @@
+/*
+ * main.c - $program.name
+ * Copyright (C) $program.year $program.author
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+\#include <stdio.h>
+\#include "args.h"
+
+#for $i in $program.commands.defaults:
+#if $i.name == "verbose"
+extern bool verbose;
+#end if
+#if $i.name == "debug"
+extern bool debug;
+#end if
+#end for
+#for $i in $program.commands.flags:
+extern bool $i.name;
+#end for
+
+int main (int argc, char** argv)
+{
+    arguments(argc,argv);
+    printf("Hello, world!\n");
+
+    if (debug == true)
+    {
+        printf("DEBUG ON\n");
+        if (verbose == true)
+            printf("VERBOSE ON\n");
+        else
+            printf("VERBOSE OFF\n");
+#for $i in $program.commands.flags:
+		if ($i.name == true)
+			printf("$i.name.upper() ON\n");
+		else
+			printf("$i.name.upper() OFF\n");
+#end for
+    }
+
+    return 0;
+}

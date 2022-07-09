@@ -1,0 +1,84 @@
+\#include "${state.context.name}.h"
+
+/* We need to know about or initial state: */
+\#include "${state.stop.name.capitalize()}State.h"
+
+/* We need to know about final state: */
+\#include "${state.states[-1].name.capitalize()}State.h"
+
+\#include "${state.name.capitalize()}StateInternal.h"
+#if len($state.context.include) > 0
+#for i in range(0, len($state.context.include)):
+\#include "${state.context.include[i].header}"
+#end for
+#end if
+\#include <stdlib.h>
+
+\#include "message.h" // DEBUG
+
+struct ${state.context.name}
+{
+    struct ${state.name.capitalize()}State state;
+#if len($state.context.struct) > 0
+#for i in range(0, len($state.context.struct)):
+    ${state.context.struct[i].type} ${state.context.struct[i].name};
+#end for
+#end if
+};
+
+/* Estatico */
+/* USING:
+    ${state.context.name}Ptr p = create${state.name.capitalize()}();
+    ${state.start.name}${state.name.capitalize()}(p);
+*/
+#define MAX_NO_OF_${state.context.name.upper()}S 2
+static struct ${state.context.name} objectPool[MAX_NO_OF_${state.context.name.upper()}S];
+static size_t numberOfObjects = 0;
+
+${state.context.name}Ptr create${state.name.capitalize()} (void)
+{
+    message("** create${state.name.capitalize()} **");
+
+    ${state.context.name}Ptr instance = NULL;
+
+    if (numberOfObjects < MAX_NO_OF_${state.context.name.upper()}S)
+    {
+        instance = &objectPool[numberOfObjects++];
+        /* Initialize the object... */
+
+        /* Specify the initial state. */
+        ${state.transitionTo.name}${state.stop.name.capitalize()} (&instance->state);
+        /* Initialize the other attributes here.*/
+    }
+
+    return instance;
+}
+
+void statemachine(void)
+{
+    message("** statemachine **");
+
+    ${state.context.name}Ptr instance = NULL;
+    ${state.context.name}Ptr stop     = NULL;
+
+    if (numberOfObjects < MAX_NO_OF_${state.context.name.upper()}S)
+    {
+        instance = &objectPool[numberOfObjects++];
+        stop     = &objectPool[numberOfObjects++];
+
+        ${state.transitionTo.name}${state.states[-1].name.capitalize()} (&stop->state);
+        ${state.transitionTo.name}${state.stop.name.capitalize()} (&instance->state);
+
+        while (stop->state.func != instance->state.func)
+        {
+            instance->state.func (&instance->state);
+        }
+    }
+}
+
+void destroy${state.name.capitalize()} (${state.context.name}Ptr instance)
+{
+    message("** destroy${state.name.capitalize()} **");
+
+    //free (instance);
+}

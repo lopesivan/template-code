@@ -1,0 +1,49 @@
+\#include "${state.name.capitalize()}State.h"
+\#include "${state.name.capitalize()}StateInternal.h"
+
+\#include "message.h" // DEBUG
+
+/*
+Provide the default implementations:
+*/
+
+static void default${state.stop.name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** default${state.stop.name.capitalize()} **");
+
+    /* We'll get here if the stop event isn't supported
+       in the concrete state. */
+}
+
+static void default${state.start.name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** default${state.start.name.capitalize()} **");
+
+    /* We'll get here if the start event isn't supported
+       in the concrete state. */
+}
+
+#if len($state.states) > 0
+#for i in range(0, len($state.states)):
+static void default${state.states[i].name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** default${state.states[i].name.capitalize()} **");
+    /* We'll get here if the start event isn't supported
+       in the concrete state. */
+}
+#end for
+#end if
+
+void ${state.defaultImplementation.name} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.defaultImplementation.name} **");
+
+    state->${state.start.name.lower()} = default${state.start.name.capitalize()};
+    state->${state.stop.name.lower()}  = default${state.stop.name.capitalize()};
+
+#if len($state.states) > 0
+#for i in range(0, len($state.states)):
+    state->${state.states[i].name.lower()} = default${state.states[i].name.capitalize()};
+#end for
+#end if
+}

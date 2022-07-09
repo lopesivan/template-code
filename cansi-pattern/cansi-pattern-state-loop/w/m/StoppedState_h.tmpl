@@ -1,0 +1,8 @@
+\#ifndef ${state.stop.name.upper()}_STATE_H
+\#define ${state.stop.name.upper()}_STATE_H
+
+\#include "${state.name.capitalize()}State.h"
+
+void ${state.transitionTo.name}${state.stop.name.capitalize()} (${state.name.capitalize()}StatePtr state);
+
+\#endif

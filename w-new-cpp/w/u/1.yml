@@ -1,0 +1,7 @@
+cmd: { 'name': name,
+       'dir':  out }
+
+unicode: { 'at': '@',
+           'arrow': '➡' }
+
+

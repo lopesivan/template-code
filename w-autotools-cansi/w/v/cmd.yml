@@ -1,0 +1,5 @@
+cmd: { 'name': gof,
+       'dir': outdir }
+
+
+

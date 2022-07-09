@@ -1,0 +1,77 @@
+\#include "${adt.name}.h"
+#if len($adt.class) > 0
+\#include "${adt.class[0].name}.h"
+#end if
+\#include <stdlib.h>
+
+struct ${adt.name.capitalize()}
+{
+#for i in range(0, len($adt.struct)):
+    ${adt.struct[i].type} ${adt.struct[i].name};
+#end for
+};
+
+\#define MAX_NO_OF_${adt.name.upper()}S 42
+
+static struct ${adt.name.capitalize()} objectPool[MAX_NO_OF_${adt.name.upper()}S];
+static size_t numberOfObjects = 0;
+
+${adt.name.capitalize()}${adt.ptr} create${adt.name.capitalize()}
+#if len($adt.ctor) > 1
+ (#slurp
+#for i in range(0, len($adt.ctor)-1):
+${adt.ctor[i].type} ${adt.ctor[i].name}, #slurp
+#end for
+${adt.ctor[-1].type} ${adt.ctor[-1].name}#slurp
+)
+#else
+#if len($adt.ctor) == 0
+()
+#else
+(${adt.ctor[0].type} ${adt.ctor[0].name})
+#end if
+#end if
+{
+    ${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()} = NULL;
+
+    if (numberOfObjects < MAX_NO_OF_${adt.name.upper()}S)
+    {
+        ${adt.name.lower()} = &objectPool[numberOfObjects++];
+        /* Initialize the object... */
+        ${adt.name.lower()}->${strategy.name.lower()}Strategy = ${strategy.name.capitalize()}Strategy;
+    }
+
+    return ${adt.name.lower()};
+}
+
+void destroy${adt.name.capitalize()}
+    (${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()})
+{
+    /*
+      In case de-allocation is needed, an array will still do, but a more
+      sophisticated method for keeping track of "allocated" objects will be
+      needed.  However, such an algorithm is outside the scope of this book.
+    */
+}
+
+
+void ${strategy.method.lower()}${strategy.name.capitalize()}Category#slurp
+#if len($strategy.ctor) > 1
+(#slurp
+#for i in range(0, len($strategy.ctor)-1):
+${strategy.ctor[i].type} ${strategy.ctor[i].name}, #slurp
+#end for
+${strategy.ctor[-1].type} ${strategy.ctor[-1].name}#slurp
+)
+#else
+#if len($strategy.ctor) == 0
+()
+#else
+(${strategy.ctor[0].type} ${strategy.ctor[0].name})
+#end if
+#end if
+{
+    ${adt.name.lower()}->${strategy.name.lower()}Strategy = new${strategy.name.capitalize()}Strategy;
+}
+
+

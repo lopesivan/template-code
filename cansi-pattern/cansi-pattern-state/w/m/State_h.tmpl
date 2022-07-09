@@ -1,0 +1,9 @@
+\#ifndef ${state.name.upper()}_STATE_H
+\#define ${state.name.upper()}_STATE_H
+
+/* An incomplete type for the state representation itself. */
+typedef struct ${state.name.capitalize()}State* ${state.name.capitalize()}StatePtr;
+
+void ${state.defaultImplementation.name} (${state.name.capitalize()}StatePtr state);
+
+\#endif

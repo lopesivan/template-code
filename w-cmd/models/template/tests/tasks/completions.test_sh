@@ -1,0 +1,36 @@
+b.module.require unittest
+
+# test:
+# ➡ template completions
+function b.test.template_completions () {
+
+  local cmd="$(
+    echo '--help --version --usage' \
+          '-a --add'                \
+          '-l --list'               \
+          '-n --name' |
+
+    sed 's/ /\n/g' )"
+
+  b.unittest.assert_equal \
+    "${cmd}" "$(template completions)"
+}
+
+# test:
+# ➡ template completions --help
+function b.test.template_long_option_help () {
+  local jsonfile="$(dirname $(readlink -f $(which template)))/etc/templatedoc.json"
+
+  test -n "$jsonfile"           # se a variavel nao e nula
+  b.unittest.assert_success $?  # entao sucesso
+
+  local cmd="template completions --help"
+
+  local description=$(cat $jsonfile |
+    jq --raw-output '.template[] | select(.command == "completions") | .description'
+  )
+
+  b.unittest.assert_equal \
+    "$description" "$(${cmd})"
+}
+

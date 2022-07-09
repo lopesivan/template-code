@@ -1,0 +1,36 @@
+b.module.require unittest
+
+\# test:
+\# ${unicode.arrow} ${cmd.name} completions
+function b.test.${cmd.name}_completions () {
+
+  local cmd="\$(
+    echo '--help --version --usage' \
+          '-a --add'                \
+          '-l --list'               \
+          '-n --name' |
+
+    sed 's/ /\n/g' )"
+
+  b.unittest.assert_equal \
+    "\${cmd}" "\$(${cmd.name} completions)"
+}
+
+\# test:
+\# ${unicode.arrow} ${cmd.name} completions --help
+function b.test.${cmd.name}_long_option_help () {
+  local jsonfile="\$(dirname \$(readlink -f \$(which ${cmd.name})))/etc/${cmd.name}doc.json"
+
+  test -n "\$jsonfile"           # se a variavel nao e nula
+  b.unittest.assert_success \$?  # entao sucesso
+
+  local cmd="${cmd.name} completions --help"
+
+  local description=\$(cat \$jsonfile |
+    jq --raw-output '.${cmd.name}[] | select(.command == "completions") | .description'
+  )
+
+  b.unittest.assert_equal \
+    "\$description" "\$(\${cmd})"
+}
+

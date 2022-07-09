@@ -1,0 +1,28 @@
+\#include <stdlib.h>
+\#include <stdio.h>
+
+\#include "${state.context.name}.h"
+
+/*****************************************************************************
+ *                                                                           *
+ *  --------------------------------- main --------------------------------- *
+ *                                                                           *
+ *****************************************************************************/
+
+int
+main (int argc, char *argv[]) {
+
+    ${state.context.name}Ptr p = create${state.name.capitalize()}();
+    ${state.start.name}${state.name.capitalize()}(p);
+#if len($state.states) > 0
+#for i in range(0, len($state.states)):
+    ${state.states[i].name}${state.name.capitalize()}(p);
+#end for
+#end if
+
+    ${state.stop.name}${state.name.capitalize()}(p);
+
+    return EXIT_SUCCESS;
+}
+
+/* -*- vim: set ts=4 sw=4 tw=78 ft=c: -*- */

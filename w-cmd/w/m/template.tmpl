@@ -1,0 +1,62 @@
+b.module.require opt
+
+b.module.require options
+b.module.require config
+b.module.require exception
+b.module.require exit
+
+
+function try_again () {
+    echo \
+    "Ocorreu um erro, verifique o output ou rode os testes para descobrir o erro"
+}
+
+\# Run!
+function run () {
+
+    if ! ${cmd.name}.config.load; then
+        return 1
+    fi
+
+    if [ -n "\$1" ]; then
+
+        case x\$1 in
+        xcommands|xcompletions|xusage)
+            b.task.run "\$${unicode.at}"
+        ;;
+        xinit)
+            b.task.run "\$${unicode.at}"
+        ;;
+        xtasks)
+            echo enable \$${unicode.at}:
+            b.task.run "commands"
+        ;;
+        xoptions)
+            echo enable \$${unicode.at}:
+            b.task.run "completions"
+        ;;
+        \#=====================================================================
+        \# BEGIN TASKS ========================================================
+        \#=====================================================================
+        xjava)
+            b.task.run "\$${unicode.at}"
+        ;;
+        \#=====================================================================
+        \# END ================================================================
+        \#=====================================================================
+        x*)
+            b.task.run "default" "\$${unicode.at}"
+        ;;
+        esac
+    else
+        b.task.run "usage"
+    fi
+}
+
+b.try.do run "\$${unicode.at}"
+b.catch FileNotFoundException ${cmd.name}.exception.file_not_found
+b.catch StringIsNullException ${cmd.name}.exception.string_is_null
+\#b.finally try_again
+b.try.end
+
+\# vim: set ts=4 sw=4 tw=78 ft=sh:

@@ -1,0 +1,13 @@
+\#include "${state.name.capitalize()}State.h"
+\#include "${state.name.capitalize()}StateInternal.h"
+
+\#include "message.h" // DEBUG
+
+/*
+Provide the default implementations:
+*/
+
+void ${state.defaultImplementation.name} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.defaultImplementation.name} **");
+}

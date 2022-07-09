@@ -1,0 +1,7 @@
+cmd: { 'name': ttjava,
+       'dir':  out }
+
+unicode: { 'at': '@',
+           'arrow': '➡' }
+
+

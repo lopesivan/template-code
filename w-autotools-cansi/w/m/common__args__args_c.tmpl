@@ -1,0 +1,93 @@
+#encoding UTF-8
+#compiler commentStartToken = '//'
+// comment
+#compiler reset
+\#include <getopt.h>
+\#include <stdio.h>
+\#include <stdlib.h>
+
+\#include "args.h"
+
+void
+print_help (void)
+{
+#raw
+    printf ("\
+Usage: \e[1;34m%s\e[m [OPTION]...\n\
+Prints \"Hello, world!\" to the console.\n\
+  -h, --help          display this help and exit\n\
+  -v, --version       display version information and exit\n\
+\n\
+Report bugs to: <\e[1;34m%s\e[m>\n\
+hello-world home page: <\e[1;34m%s\e[m>\n", PACKAGE, PACKAGE_BUGREPORT, PACKAGE_URL);
+#end raw
+}
+
+void
+print_version (void)
+{
+#raw
+    printf ("\
+\e[1;34m%s\e[m\n\
+Copyright (C) 2018 %s\n\
+License GPLv3+: GNU GPL version 3 or later <%s>\n\
+This is free software: you are free to change and redistribute it.\n\
+There is NO WARRANTY, to the extent permitted by law.\n",
+    PACKAGE_STRING,
+    AUTHOR,
+    LICENSE_URL);
+#end raw
+}
+void
+arguments (int argc, char **argv)
+{
+    int o;
+
+    static struct option long_options[] =
+    {
+        { "help", no_argument, NULL, 'h'    },
+        { "version", no_argument, NULL, 'v' },
+        { NULL, 0, NULL, 0                  }
+    };
+
+    while (1)
+    {
+
+        /*
+         * getopt_long stores the option index here.
+         */
+        int option_index = 0;
+
+        o = getopt_long (argc, argv, "hv", long_options, &option_index);
+
+        /*
+         * Detect the end of the options.
+         */
+        if (o == -1)
+            break;
+
+        switch (o)
+        {
+        case 'h':
+            print_help ();
+            exit (EXIT_SUCCESS);
+            break;
+
+        case 'v':
+            print_version ();
+            exit (EXIT_SUCCESS);
+            break;
+
+        case '?':
+            /*
+             * getopt_long already printed an error message.
+             */
+            break;
+
+        default:
+            abort ();
+        }
+    }
+}
+
+/* vim: set ts=4 sw=4 tw=78 ft=c: */

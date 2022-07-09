@@ -1,0 +1,11 @@
+version: 1.4
+
+dir: out
+
+Class:
+  name: Pessoa
+  attributes:                # Atributos
+    - nome: String
+    - sobrenome: String
+    - ativa: boolean
+

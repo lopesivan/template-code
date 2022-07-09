@@ -1,0 +1,64 @@
+version: 1.4
+
+dir: out
+
+program:
+  year: 2021
+  author: Ivan Lopes
+  name: hello-world
+  github: lopesivan
+  description: Prints "Hello, world!" to the console.
+  commands:
+    defaults:
+      - name: debug
+        description: Enable debug
+        short: D
+        long: debug
+        default: false
+
+      - name: verbose
+        description: Make the operation more talkative
+        short: v
+        long: verbose
+        default: false
+
+      - name: version
+        description: display version information and exit
+        short: V
+        long: version
+        default: false
+
+      - name: help
+        description: display this help and exit
+        short: h
+        long: help
+        default: false
+
+    args:
+      - name: soma
+        description: soma com dois
+        short: s
+        long: soma
+        default: 2
+
+      - name: subtrai
+        description: diminui uma unidade
+        short: m
+        long: sub
+        default: 3
+
+    flags:
+      - name: bcolor
+        description: Liga a flag colors
+        short: c
+        long: with-colors
+        default: false
+        input: true
+
+      - name: bregex
+        description: Liga a flag regex
+        short: r
+        long: with-regex
+        default: false
+        input: true
+

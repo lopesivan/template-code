@@ -1,0 +1,15 @@
+ip: { 'address': 192.168.2.44,
+      'netmask': 255.255.255.0,
+      'network': 192.168.2.0,
+      'gateway': 192.168.2.1,
+      'dns':     192.168.2.40}
+
+interfaces: { 'wifi': wlp3s0,
+              'cable': enp2s0f1 }
+
+servers:
+- registry.local: 192.168.2.42
+- chef-server:    192.168.2.42
+- dns.server:     192.168.2.40
+- docker.server:  192.168.2.42
+- dev.server:     192.168.2.43

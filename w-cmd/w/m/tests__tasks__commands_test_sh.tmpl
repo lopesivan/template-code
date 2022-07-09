@@ -1,0 +1,32 @@
+b.module.require unittest
+
+\# test:
+\# ${unicode.arrow} ${cmd.name} commands
+function b.test.${cmd.name}_commands () {
+  local commands=( add commands completions
+                   copy default e file git init keys
+                   link ls new project
+                   rm ${cmd.name} usage x
+                 )
+  b.unittest.assert_equal \
+    "\$( echo \${commands[*]}| sort |xargs -n1 )" "\$(${cmd.name} commands)"
+}
+
+\# test:
+\# ${unicode.arrow} ${cmd.name} commands --help
+function b.test.${cmd.name}_long_option_help () {
+  local jsonfile="\$(dirname \$(readlink -f \$(which ${cmd.name})))/etc/${cmd.name}doc.json"
+
+  test -n "\$jsonfile"           # se a variavel nao e nula
+  b.unittest.assert_success \$?  # entao sucesso
+
+  local cmd="${cmd.name} commands --help"
+
+  local description=\$(cat \$jsonfile |
+    jq --raw-output '.${cmd.name}[] | select(.command == "commands") | .description'
+  )
+
+  b.unittest.assert_equal \
+    "\$description" "\$(\${cmd})"
+}
+

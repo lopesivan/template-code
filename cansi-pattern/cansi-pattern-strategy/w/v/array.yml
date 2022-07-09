@@ -1,0 +1,40 @@
+adt: {
+     'name':        array,
+     'memory_pool': larray,
+     'ptr':         _ptr,
+
+     'struct': [
+          { 'type': unsigned int, 'name': size },
+          { 'type': Data, 'name': data },
+     ],
+
+     'ctor': [
+          { 'type': unsigned int, 'name': size },
+     ],
+
+     'class': [
+                { 'name': data,
+                  'struct': [
+                       { 'type': Scalar, 'name': data },
+                  ],
+                  'include': [
+                       { 'name': scalar.h },
+                  ],
+                },
+                { 'name': real,
+                  'struct': [
+                       { 'type': float, 'name': real },
+                  ],
+                  'include': [
+                  ],
+                },
+                { 'name': scalar,
+                  'struct': [
+                       { 'type': Real, 'name': scalar },
+                  ],
+                  'include': [
+                       { 'name': real.h },
+                  ],
+                },
+     ]
+}

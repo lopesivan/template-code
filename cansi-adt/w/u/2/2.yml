@@ -1,0 +1,44 @@
+adt: {
+     # Definições do adt
+     'name':         Point2d,
+     'memory_pool':  MemoryPollPoint2d,
+     'ptr':          Ptr,
+     'suffix':       _t,
+     'dir':          out,
+
+     # adt.h headers
+     'include': [
+        { 'name': Real.h },
+     ],
+
+     ### SOURCE
+     # adt.c - definição da struct que será ocultda
+     'struct': [
+          { 'type': Real, 'name': x  },
+          { 'type': Real, 'name': y  },
+     ],
+
+     # interface do construtor
+     'ctor': [
+          { 'type': Real, 'name': x  },
+          { 'type': Real, 'name': y  },
+     ],
+
+     #  Headers com definições das estruturas
+     'class': [
+                { 'name': Real,
+                  'struct': [
+                       { 'type': float, 'name': Real },
+                  ],
+                  'include': [
+                  ],
+                },
+                { 'name': Integer,
+                  'struct': [
+                       { 'type': unsigned long, 'name': Scalar },
+                  ],
+                  'include': [
+                  ],
+                },
+     ]
+}

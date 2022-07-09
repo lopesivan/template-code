@@ -1,0 +1,26 @@
+state: {
+     'name':  watch,
+     'context':  { 'name': DigitalStopWatch ,
+                   'struct': [
+                      { 'type': TimeSource, 'name': source     },
+                      { 'type': Display, 'name': watchDisplay  },
+                   ],
+                   'include': [
+                      { 'header': error.h      },
+                      { 'header': TimeSource.h },
+                      { 'header': Display.h    },
+                   ],
+     },
+
+     'defaultImplementation': {'name': defaultImplementation},
+     'transitionTo':          {'name':transitionTo},
+
+     'start': { 'name': start, 'to': state1 },
+     'stop':  { 'name': stop,  'to': start  },
+
+     'states': [
+                { 'name': state1, 'to': state2 },
+                { 'name': state2, 'to': state3 },
+                { 'name': state3, 'to': stop   },
+     ]
+}

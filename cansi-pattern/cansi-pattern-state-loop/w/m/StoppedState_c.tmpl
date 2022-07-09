@@ -1,0 +1,27 @@
+\#include "${state.stop.name.capitalize()}State.h"
+\#include "${state.name.capitalize()}StateInternal.h"
+
+/* Possible transition to the following state: */
+\#include "${state.stop.to.capitalize()}State.h"
+
+\#include "message.h" // DEBUG
+
+static void ${state.stop.to}${state.name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.stop.to}${state.name.capitalize()} **");
+
+    ${state.transitionTo.name}${state.stop.to.capitalize()} (state);
+}
+
+void ${state.transitionTo.name}${state.stop.name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.transitionTo.name}${state.stop.name.capitalize()} **");
+
+    /* Initialize with the default implementation before
+       specifying the events to be handled in the stoped
+       state. */
+
+    ${state.defaultImplementation.name} (state);
+    state->func = ${state.stop.to}${state.name.capitalize()};
+}
+

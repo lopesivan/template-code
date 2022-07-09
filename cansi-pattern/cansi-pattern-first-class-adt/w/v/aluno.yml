@@ -1,0 +1,37 @@
+adt: {
+     'name':         Aluno,
+     'memory_pool':  MemoryPollAluno,
+     'ptr':          Ptr,
+
+     'include': [
+        { 'name': Address.h },
+     ],
+
+     'struct': [
+          { 'type': const char*, 'name': name         },
+          { 'type': Address,     'name': address      },
+     ],
+
+     'ctor': [
+          { 'type': const char*, 'name': name       },
+          { 'type': const Address*, 'name': address },
+     ],
+
+     'class': [
+                { 'name': Address,
+                  'struct': [
+                       { 'type': const char*, 'name': city   },
+                       { 'type': const char*, 'name': street },
+                  ],
+                  'include': [
+                  ],
+                },
+                { 'name': Order,
+                  'struct': [
+                  ],
+                  'include': [
+                  ],
+                },
+
+     ]
+}

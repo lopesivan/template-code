@@ -1,0 +1,28 @@
+#set $id=$index
+\#include "${state.states[id].name.capitalize()}State.h"
+\#include "${state.name.capitalize()}StateInternal.h"
+
+/* Possible transition to the following state: */
+\#include "${state.states[id].to.capitalize()}State.h"
+
+\#include "message.h" // DEBUG
+
+static void ${state.states[id].to}${state.name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.states[id].to}${state.name.capitalize()} **");
+
+    ${state.transitionTo.name}${state.states[id].to.capitalize()} (state);
+}
+
+void ${state.transitionTo.name}${state.states[id].name.capitalize()} (${state.name.capitalize()}StatePtr state)
+{
+    message("** ${state.transitionTo.name}${state.states[id].name.capitalize()} **");
+
+    /* Initialize with the default implementation before
+       specifying the events to be handled in the started
+       state. */
+
+    ${state.defaultImplementation.name} (state);
+    state->${state.states[id].to.lower()} = ${state.states[id].to}${state.name.capitalize()};
+}
+

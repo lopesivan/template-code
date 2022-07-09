@@ -1,0 +1,22 @@
+_${cmd.name}()
+{
+    COMPREPLY=()
+    local word="\${COMP_WORDS[COMP_CWORD]}"
+
+    if [ "\$COMP_CWORD" -eq 1 ]; then
+        COMPREPLY=( \$(compgen -W "\$(${cmd.name} commands)" -- "\$word") )
+    \# else
+    \#     local words=("\${COMP_WORDS[${unicode.at}]}")
+
+    \#     case x\${words[1]} in
+    \#         xnew)
+    \#             unset words[0]
+    \#             unset words[\$COMP_CWORD]
+    \#             local completions=\$(${cmd.name} new -l "\${words[${unicode.at}]}" )
+    \#             COMPREPLY=( \$(compgen -W "\$completions" -- "\$word") )
+    \#         ;;
+    \#     esac
+
+    fi
+}
+complete -F _${cmd.name} ${cmd.name}

@@ -1,0 +1,26 @@
+#encoding UTF-8
+#compiler commentStartToken = '//'
+// comment
+#compiler reset
+{
+  "*": {
+    "make": "make -C build"
+  },
+  "main.c": {
+    "type": "main",
+  },
+  "CMakeLists.txt": {
+    "type": "cmake"
+  },
+
+  "include/*.h": {
+    "type": "include",
+    "skeleton": "cansiheader",
+    "alternate": "source/{}.c"
+  },
+  "source/*.c": {
+    "type": "source",
+    "skeleton": "cansisource",
+    "alternate": "include/{}.h"
+  }
+}

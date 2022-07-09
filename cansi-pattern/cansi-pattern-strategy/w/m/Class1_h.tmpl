@@ -1,0 +1,21 @@
+#set $id=$index
+\#ifndef ${adt.class[id].name.upper()}_H
+\#define ${adt.class[id].name.upper()}_H
+#if len($adt.class[id].include) > 0
+#for i in range(0, len($adt.class[id].include)):
+\#include "$adt.class[id].include[i].name"
+#end for
+#end if
+
+/*
+I never really dive into the details of this type.
+Let's just create a dummy placeholder for the information.
+*/
+typedef struct
+{
+#for i in range(0, len($adt.class[id].struct)):
+    ${adt.class[id].struct[i].type} ${adt.class[id].struct[i].name};
+#end for
+} ${adt.class[id].name.capitalize()};
+
+\#endif

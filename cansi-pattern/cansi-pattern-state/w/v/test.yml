@@ -1,0 +1,21 @@
+state: {
+     'name':  estado,
+     'context':  { 'name': contexto,
+                   'struct': [
+                   ],
+                   'include': [
+                   ],
+     },
+
+     'defaultImplementation': {'name': implementacaoPadrao},
+     'transitionTo':          {'name':transicaoPara},
+
+     'start': { 'name': inicio, 'to': state1 },
+     'stop':  { 'name': fim,    'to': inicio  },
+
+     'states': [
+                { 'name': state1, 'to': state2 },
+                { 'name': state2, 'to': state3 },
+                { 'name': state3, 'to': fim    },
+     ]
+}

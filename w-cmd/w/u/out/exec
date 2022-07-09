@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+path=$PWD
+(
+  cd $(dirname $(readlink -f $(which ttjava)))
+  LOCALPATH=$path bang run ttjava $@
+)
+exit 0

@@ -1,0 +1,17 @@
+#import re
+#set a = $state.context.name
+#set b = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', $a)
+#set c = re.sub('([a-z0-9])([A-Z])', r'\1_\2', $b).upper()
+\#ifndef ${c}_H
+\#define ${c}_H
+
+/*
+A pointer to an incomplete type (hides the implementation details).
+*/
+typedef struct ${state.context.name}* ${state.context.name}Ptr;
+
+${state.context.name}Ptr create${state.name.capitalize()} (void);
+void destroy${state.name.capitalize()} (${state.context.name}Ptr instance);
+void statemachine(void);
+
+\#endif

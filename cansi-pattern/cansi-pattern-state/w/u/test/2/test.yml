@@ -1,0 +1,18 @@
+state: {
+     'name':  Led,
+     'context':  { 'name': blink,
+                   'struct': [
+                   ],
+                   'include': [
+                   ],
+     },
+
+     'defaultImplementation': {'name': implementacaoPadrao},
+     'transitionTo':          {'name':transicaoPara},
+
+     'start': { 'name': liga, 'to': desliga },
+     'stop':  { 'name': desliga,    'to': liga  },
+
+     'states': [
+     ]
+}

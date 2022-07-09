@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+path=$PWD
+(
+  cd $(dirname $(readlink -f $(which template)))
+  LOCALPATH=$path bang run template $@
+)
+exit 0

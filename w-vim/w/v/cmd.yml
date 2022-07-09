@@ -1,0 +1,7 @@
+cmd: { 'name': gof,
+       'dir': outdir }
+
+unicode: { 'at': '@',
+           'arrow': '➡' }
+
+

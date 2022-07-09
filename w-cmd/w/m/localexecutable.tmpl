@@ -1,0 +1,7 @@
+\#!/usr/bin/env bash
+path=\$PWD
+(
+  cd \$(dirname \$(readlink -f \$(which ${cmd.name})))
+  LOCALPATH=\$path bang run ${cmd.name} \$${unicode.at}
+)
+exit 0

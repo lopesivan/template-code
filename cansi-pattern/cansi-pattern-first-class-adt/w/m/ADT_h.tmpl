@@ -1,0 +1,44 @@
+\#ifndef ${adt.name.upper()}_H
+\#define ${adt.name.upper()}_H
+
+#if len($adt.include) > 0
+#for i in range(0, len($adt.include)):
+\#include "$adt.include[i].name"
+#end for
+#end if
+
+/*
+A pointer to an incomplete type (hides the implementation details).
+*/
+typedef struct ${adt.name.capitalize()}* ${adt.name.capitalize()}${adt.ptr};
+
+/*
+Create a ${adt.name.capitalize()} and return a handle to it.
+*/
+${adt.name.capitalize()}${adt.ptr} create${adt.name.capitalize()}#slurp
+#if len($adt.ctor) > 1
+(#slurp
+#for i in range(0, len($adt.ctor)-1):
+${adt.ctor[i].type} ${adt.ctor[i].name}, #slurp
+#end for
+${adt.ctor[-1].type} ${adt.ctor[-1].name});
+#else
+#if len($adt.ctor) == 0
+();
+#else
+(${adt.ctor[0].type} ${adt.ctor[0].name});
+#end if
+#end if
+
+/*
+Destroy the given ${adt.name.capitalize()} object.
+All handles to it will be invalidated.
+*/
+void destroy${adt.name.capitalize()}#slurp
+(${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()});
+
+#if len($adt.ctor) > 1
+void show${adt.name.capitalize()}#slurp
+(${adt.name.capitalize()}${adt.ptr} ${adt.name.lower()});
+#end if
+\#endif

@@ -1,0 +1,9 @@
+#set $id=$index
+\#ifndef ${state.states[id].name.upper()}_STATE_H
+\#define ${state.states[id].name.upper()}_STATE_H
+
+\#include "${state.name.capitalize()}State.h"
+
+void ${state.transitionTo.name}${state.states[id].name.capitalize()} (${state.name.capitalize()}StatePtr state);
+
+\#endif

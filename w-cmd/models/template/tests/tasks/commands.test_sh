@@ -1,0 +1,32 @@
+b.module.require unittest
+
+# test:
+# ➡ template commands
+function b.test.template_commands () {
+  local commands=( add commands completions
+                   copy default e file git init keys
+                   link ls new project
+                   rm template usage x
+                 )
+  b.unittest.assert_equal \
+    "$( echo ${commands[*]}| sort |xargs -n1 )" "$(template commands)"
+}
+
+# test:
+# ➡ template commands --help
+function b.test.template_long_option_help () {
+  local jsonfile="$(dirname $(readlink -f $(which template)))/etc/templatedoc.json"
+
+  test -n "$jsonfile"           # se a variavel nao e nula
+  b.unittest.assert_success $?  # entao sucesso
+
+  local cmd="template commands --help"
+
+  local description=$(cat $jsonfile |
+    jq --raw-output '.template[] | select(.command == "commands") | .description'
+  )
+
+  b.unittest.assert_equal \
+    "$description" "$(${cmd})"
+}
+
