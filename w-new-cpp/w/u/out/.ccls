@@ -1,5 +1,0 @@
-clang
-%h -x c-header
--I./inc
--I.
--std=c99
