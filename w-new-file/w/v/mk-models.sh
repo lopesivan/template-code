@@ -62,7 +62,7 @@ parser = optparse.OptionParser(usage="%prog -[ [s] --[save] ]", version="%prog 1
 #
 parser.add_option( '-p', '--stdout',
         dest    = "stdout",
-        default = False,
+        default = True,
         action  = "store_true",
         help    = "Show file in stdout."
         )
@@ -105,14 +105,28 @@ EOF
 L=$(look LANGUAGE ../c/Makefile | sed 's/.* =[ ]*//')
 D=$(look DESIGN_PATTERN ../c/Makefile | sed 's/.* =[ ]*//')
 
+P="$(ls ../m/*.tmpl |
+    sed -e 's/_/ /' -e 's/\.tmpl//' -e 's=^.*/=='|
+    sed 's/^.*/            print("python app.py {-s} -y file.yml &")/')"
+
 cat <<EOF
-        print (sys.argv[4], file=sys.stderr)
-        s = "models.T{}_{}(data_model, '${L}.${D}.{}_{}')".format( sys.argv[4].capitalize(), sys.argv[5], sys.argv[4], sys.argv[5])
-        t = eval(s)
-        if options.stdout == True :
-            t.put()
-        if options.save == True :
-            t.save()
+        if len(sys.argv) > 4:
+            if len(sys.argv) == 6:
+                s = "models.T{}_{}(data_model, '${L}.${D}.{}_{}')".format( sys.argv[4].capitalize(), sys.argv[5], sys.argv[4], sys.argv[5])
+            if len(sys.argv) == 5:
+                s = "models.T{}_{}(data_model, '${L}.${D}.{}_{}')".format( sys.argv[3].capitalize(), sys.argv[4], sys.argv[3], sys.argv[4])
+
+            print (sys.argv[4], file=sys.stderr)
+
+            t = eval(s)
+
+            if options.save == True :
+                t.save()
+            else:
+                t.put()
+        else:
+            print ("Exemplo de uso:\n")
+${P}
 
 EOF
 

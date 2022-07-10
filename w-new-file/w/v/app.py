@@ -16,7 +16,7 @@ parser = optparse.OptionParser(usage="%prog -[ [s] --[save] ]", version="%prog 1
 #
 parser.add_option( '-p', '--stdout',
         dest    = "stdout",
-        default = False,
+        default = True,
         action  = "store_true",
         help    = "Show file in stdout."
         )
@@ -54,13 +54,29 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
-        print (sys.argv[4], file=sys.stderr)
-        s = "models.T{}_{}(data_model, 'new_file.commmand.{}_{}')".format( sys.argv[4].capitalize(), sys.argv[5], sys.argv[4], sys.argv[5])
-        t = eval(s)
-        if options.stdout == True :
-            t.put()
-        if options.save == True :
-            t.save()
+        if len(sys.argv) > 4:
+            if len(sys.argv) == 6:
+                s = "models.T{}_{}(data_model, 'my_file.new_file.{}_{}')".format( sys.argv[4].capitalize(), sys.argv[5], sys.argv[4], sys.argv[5])
+            if len(sys.argv) == 5:
+                s = "models.T{}_{}(data_model, 'my_file.new_file.{}_{}')".format( sys.argv[3].capitalize(), sys.argv[4], sys.argv[3], sys.argv[4])
+
+            print (sys.argv[4], file=sys.stderr)
+
+            t = eval(s)
+
+            if options.save == True :
+                t.save()
+            else:
+                t.put()
+        else:
+            print("python app.py {-s} -y file.yml helloworld cpp")
+            print("python app.py {-s} -y file.yml helloworld c")
+            print("python app.py {-s} -y file.yml helloworld java")
+            print("python app.py {-s} -y file.yml helloworld py")
+            print("python app.py {-s} -y file.yml helloworld rs")
+            print("python app.py {-s} -y file.yml helloworld tex")
+            print("python app.py {-s} -y file.yml tictac cpp")
+            print("python app.py {-s} -y file.yml tictac c")
 
     else:
         print ("Either file is missing or is not readable")

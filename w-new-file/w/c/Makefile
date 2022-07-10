@@ -1,6 +1,6 @@
-LANGUAGE       = new_file
-DESIGN_PATTERN = commmand
-YAML           = commmand.yml
+LANGUAGE       = my_file
+DESIGN_PATTERN = new_file
+YAML           = new_file.yml
 
 model = ../m
 view  = ../v
