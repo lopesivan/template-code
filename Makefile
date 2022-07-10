@@ -1,4 +1,4 @@
-all: install
+all: reinstall
 
 configure:
 	@bash -c ./configure-template-code.sh
