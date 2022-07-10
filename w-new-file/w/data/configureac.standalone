@@ -1,0 +1,51 @@
+# configure.ac
+# vim:set foldmethod=expr foldexpr=getline(v\:lnum)=~'^##'?'>1'\:'=':
+
+## Header
+# versão mínima
+AC_PREREQ([2.69])
+
+## INIT
+# Process this file with autoconf to produce a configure script.
+# AC_INIT(package, version, [bug-report], [tarname], [url])
+AC_INIT([hello-world], [0.02], [ivan@42algoritmos.com.br],
+        [hello-world], [http://42algoritmos.com.br/])
+
+## -> NEWS README AUTHORS ChangeLog COPYING
+# We don't want to follow GNU file setup (no README, no AUTHORS, etc)
+AM_INIT_AUTOMAKE([foreign subdir-objects])
+
+AM_SILENT_RULES([yes])
+
+## Variáveis no arquivo config.h.
+#
+AC_DEFINE(ABCD, [1], [Esse texto será o comentário antes de definir a variável no arquivo config.h])
+AC_DEFINE(UMA_STRING, ["menssagem de texto"], [Essa variável aparece no config.h])
+AC_DEFINE(UM_FLOAT, [3.7], [Essa variável aparece no config.h])
+
+AC_CONFIG_SRCDIR([src/hello-world.c])
+AC_CONFIG_HEADERS([config.h])
+
+## Compile Rules
+# Duas regras de compilação
+AC_PROG_CC
+AC_PROG_CC_C_O
+
+## Checks for libraries.
+# PKG_PROG_PKG_CONFIG
+# PKG_CHECK_MODULES(m,,)
+
+## Checks for header files.
+#
+AC_CHECK_HEADERS([math.h stdlib.h string.h unistd.h])
+
+## Checks for library functions.
+#
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([strdup])
+
+## Output
+#
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+
