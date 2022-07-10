@@ -53,6 +53,6 @@ sed 's/^\([ ]\+\)\(#\)/\1\\\2/g' -i *.tmpl
 sed 's/^#/\\#/g' -i *.tmpl
 sed 's/\$/\\&/g' -i *.tmpl
 sed.acentos -i *.tmpl
-sed 's/template/${cmd.name}/g' -i *.tmpl
+# sed 's/template/${cmd.name}/g' -i *.tmpl
 # ----------------------------------------------------------------------------
 exit 0
