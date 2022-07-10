@@ -54,6 +54,7 @@ function mvc() {
     mvc_view $d
 }
 
+export PYTHONIOENCODING=utf-8
 export PYENV_VERSION=neovim3
 #source ${HOME}/developer/qutebrowser/.venv/bin/activate
 # DO STUFF
