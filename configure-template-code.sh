@@ -16,7 +16,9 @@ function make_() {
 function mk_code() {
     local path=$1
     local model=${path}/w/m
-    cd "${model}" && ./mk-code.sh
+    cd "${model}" && {
+        test -e ./mk-code.sh && ./mk-code.sh || echo "mk-code.sh not found"
+    }
 }
 
 function mk_models() {
@@ -60,7 +62,7 @@ export PYENV_VERSION=neovim3
 # DO STUFF
 d=$(brew --prefix)/opt/template-code
 mvc ${d}/w-new-file
-
+mvc ${d}/w-new-file/w-autotools-options
 # Reset version
 unset PYENV_VERSION
 
