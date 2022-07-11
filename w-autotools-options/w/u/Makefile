@@ -1,14 +1,8 @@
-YAML =  1.yml
-dir  = ./out
+all: true
 
-all: view
-
-save:
-	python app.py -s -y $(YAML) helloworld cpp
-view:
-	python app.py -y $(YAML) helloworld cpp
-
-clean:
-	rm -rf ${dir}
+true:
+	python app.py -y 1.yml options boolean
+false:
+	python app.py -y 2.yml options boolean
 
 # END OF FILE

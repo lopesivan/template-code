@@ -2,6 +2,8 @@ data:
   name: configure.ac
   dir:  out
   arg:
-    name: gnu args
-    value: true
+    name: DEBUG CORE
+    value: false
+
+
 

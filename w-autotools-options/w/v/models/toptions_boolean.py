@@ -4,7 +4,7 @@ from .sh import Sh
 import sys
 
 
-class TEnable_ac(Factory):
+class TOptions_boolean(Factory):
     """Classe de template."""
     def __init__(self, data_model, template_name):
 

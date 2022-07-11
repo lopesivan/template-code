@@ -70,8 +70,7 @@ def main():
                 t.put()
         else:
             print ("Exemplo de uso:\n")
-            print("python app.py {-s} -y file.yml disable ac")
-            print("python app.py {-s} -y file.yml enable ac")
+            print("python app.py {-s} -y file.yml options boolean")
 
     else:
         print ("Either file is missing or is not readable")

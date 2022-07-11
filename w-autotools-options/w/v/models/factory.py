@@ -2,13 +2,11 @@
 """Criação de arquivos de configuração para ip estático."""
 from abc import ABCMeta, abstractmethod
 
-from configure_ac.new_opts.enable_ac import enable_ac
-from configure_ac.new_opts.disable_ac import disable_ac
+from configure_ac.new_opts.options_boolean import options_boolean
 
 
 template = {
-    'configure_ac.new_opts.enable_ac': enable_ac(),
-    'configure_ac.new_opts.disable_ac': disable_ac(),
+    'configure_ac.new_opts.options_boolean': options_boolean(),
 }
 
 class Factory(object):
