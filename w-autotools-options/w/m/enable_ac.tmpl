@@ -1,0 +1,65 @@
+file: ${data.name}
+-----------------8<-----------------------8<---------------------------------
+#if $data.arg.value == 'true':
+dnl The variable ${data.arg.name.upper().replace(" ", '_')} is TRUE
+dnl Usage:
+dnl * CONVERT TO FALSE
+dnl ----------------------------------------they are equivalent
+dnl ./configure  --enable-${data.arg.name.lower().replace(" ", '-')}=no
+dnl ./configure  --disable-${data.arg.name.lower().replace(" ", '-')}
+dnl
+dnl * IN C CODE:
+dnl \#if ${data.arg.name.upper().replace(" ", '_')}  // <- default: TRUE
+dnl     printf ("%s is TRUE\n", "${data.arg.name.lower().replace(" ", '_')}");
+dnl \#else // --disable-${data.arg.name.lower().replace(" ", '-')}
+		   // <- FALSE
+dnl     printf ("%s is FALSE\n", "${data.arg.name.lower().replace(" ", '_')}");
+dnl \#endif
+
+m4_include([m4/autotools_disable_${data.arg.name.lower().replace(" ", '_')}.m4])
+----------------->8----------------------->8-------------------------------->8
+
+file: m4/autotools_disable_${data.arg.name.lower().replace(" ", '_')}.m4]
+-----------------8<-----------------------8<---------------------------------
+dnl [ --disable-${data.arg.name.lower().replace(" ", '-')} ]
+dnl
+dnl
+dnl     |----------------------+---------------+-------|
+dnl     | Command Line         | Variable      | State |
+dnl     |----------------------+---------------+-------|
+dnl     | ""                   | WITH_${data.arg.name.upper().replace(" ", '_')} | 1     | <- default
+dnl     | "--disable-${data.arg.name.lower().replace(" ", '-')}" | WITH_${data.arg.name.upper().replace(" ", '_')} | 0     |
+dnl     |----------------------+---------------+-------|
+dnl
+
+
+AC_ARG_ENABLE([${data.arg.name.lower().replace(" ", '-')}],
+  [AS_HELP_STRING([--disable-${data.arg.name.lower().replace(" ", '-')}],
+    [disable ${data.arg.name} @<:@default: no@:>@])],
+  [${data.arg.name.lower().replace(" ", '_')}=\${enableval}], [${data.arg.name.lower().replace(" ", '_')}=yes])
+
+if test "x\${${data.arg.name.lower().replace(" ", '_')}}" = xyes; then
+   AC_DEFINE(${data.arg.name.upper().replace(" ", '_')}, 1, [Enable args])
+fi
+
+dnl -----------------------------------------------
+
+AM_CONDITIONAL([WITH_${data.arg.name.upper().replace(" ", '_')}], [test x\${${data.arg.name.lower().replace(" ", '_')}} = xyes])
+
+0000
+
+
+#end if
+
+
+${data.arg.name.replace(" ", '-')}
+${data.arg.name.replace(" ", '_')}
+
+${data.arg.name.upper().replace(" ", '_')}
+${data.arg.name.lower().replace(" ", '_')}
+0000
+
+${data.name}
+${data.arg}
+${data.arg.name}
+${data.arg.value}

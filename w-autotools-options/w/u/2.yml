@@ -1,0 +1,16 @@
+Class:                       # Classe
+- name: Pessoa               # Nome da Classe
+- attributes:                # Atributos
+    - nome: String           # primeiro tipo definido
+    - sobrenome: String
+    - numero: int
+    - numeros: int[6]
+    - ativa: boolean
+
+cmd: { 'name': name,
+       'dir':  out }
+
+unicode: { 'at': '@',
+           'arrow': '➡' }
+
+
