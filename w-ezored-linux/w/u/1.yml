@@ -1,4 +1,4 @@
 data:
   name: linux_app
-  dir:  .
+  dir:  out
 

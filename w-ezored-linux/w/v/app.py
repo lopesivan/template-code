@@ -54,43 +54,49 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
-        t = models.TLinux__verbs__preparedot_py(data_model, 'ezored.linux_app.linux__verbs__preparedot_py')
+        t = models.TFiles__targets__linux__verbs__preparedot_py(data_model, 'ezored.linux_app.files__targets__linux__verbs__preparedot_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__verbs__packagedot_py(data_model, 'ezored.linux_app.linux__verbs__packagedot_py')
+        t = models.TFiles__targets__linux__verbs__packagedot_py(data_model, 'ezored.linux_app.files__targets__linux__verbs__packagedot_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__verbs__distdot_py(data_model, 'ezored.linux_app.linux__verbs__distdot_py')
+        t = models.TFiles__targets__linux__verbs__distdot_py(data_model, 'ezored.linux_app.files__targets__linux__verbs__distdot_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__verbs__builddot_py(data_model, 'ezored.linux_app.linux__verbs__builddot_py')
+        t = models.TFiles__targets__linux__verbs__builddot_py(data_model, 'ezored.linux_app.files__targets__linux__verbs__builddot_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__conan__recipe__conanfiledot_py(data_model, 'ezored.linux_app.linux__conan__recipe__conanfiledot_py')
+        t = models.TFiles__targets__linux__conan__recipe__conanfiledot_py(data_model, 'ezored.linux_app.files__targets__linux__conan__recipe__conanfiledot_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__conan__profile__ezored_linux_profile(data_model, 'ezored.linux_app.linux__conan__profile__ezored_linux_profile')
+        t = models.TFiles__targets__linux__conan__profile__ezored_linux_profile(data_model, 'ezored.linux_app.files__targets__linux__conan__profile__ezored_linux_profile')
         if options.stdout == True :
             t.put()
         if options.save == True :
             t.save()
 
-        t = models.TLinux__cmake__CMakeListsdot_txt(data_model, 'ezored.linux_app.linux__cmake__CMakeListsdot_txt')
+        t = models.TFiles__targets__linux__cmake__CMakeListsdot_txt(data_model, 'ezored.linux_app.files__targets__linux__cmake__CMakeListsdot_txt')
+        if options.stdout == True :
+            t.put()
+        if options.save == True :
+            t.save()
+
+        t = models.TFiles__config__target_linux_py(data_model, 'ezored.linux_app.files__config__target_linux_py')
         if options.stdout == True :
             t.put()
         if options.save == True :

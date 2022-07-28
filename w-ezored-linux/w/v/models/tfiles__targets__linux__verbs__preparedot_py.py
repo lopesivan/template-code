@@ -4,14 +4,14 @@ from .sh import Sh
 import sys
 
 
-class TLinux__verbs__builddot_py(Factory):
+class TFiles__targets__linux__verbs__preparedot_py(Factory):
     """Classe de template."""
     def __init__(self, data_model, template_name):
 
         Factory.__init__(self, template_name)
         self.data_model = data_model
         self.tmpl.data = data_model['data']
-        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "linux/verbs/build.py".replace("linux", self.tmpl.data['name']))
+        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "files/targets/linux/verbs/prepare.py".replace("linux", self.tmpl.data['name']))
 
     def put(self):
         fileName = "%s" % self.tmpl.name

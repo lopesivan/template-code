@@ -4,14 +4,14 @@ from .sh import Sh
 import sys
 
 
-class TLinux__conan__recipe__conanfiledot_py(Factory):
+class TFiles__targets__linux__cmake__CMakeListsdot_txt(Factory):
     """Classe de template."""
     def __init__(self, data_model, template_name):
 
         Factory.__init__(self, template_name)
         self.data_model = data_model
         self.tmpl.data = data_model['data']
-        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "linux/conan/recipe/conanfile.py".replace("linux", self.tmpl.data['name']))
+        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "files/targets/linux/cmake/CMakeLists.txt".replace("linux", self.tmpl.data['name']))
 
     def put(self):
         fileName = "%s" % self.tmpl.name

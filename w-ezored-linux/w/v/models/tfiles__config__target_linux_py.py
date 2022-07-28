@@ -4,14 +4,14 @@ from .sh import Sh
 import sys
 
 
-class TLinux__verbs__distdot_py(Factory):
+class TFiles__config__target_linux_py(Factory):
     """Classe de template."""
     def __init__(self, data_model, template_name):
 
         Factory.__init__(self, template_name)
         self.data_model = data_model
         self.tmpl.data = data_model['data']
-        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "linux/verbs/dist.py".replace("linux", self.tmpl.data['name']))
+        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "files/config/target_linux_py".replace("linux", self.tmpl.data['name']))
 
     def put(self):
         fileName = "%s" % self.tmpl.name
