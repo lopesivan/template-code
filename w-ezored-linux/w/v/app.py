@@ -54,6 +54,12 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
+        t = models.TFiles__config__target_linuxdot_py(data_model, 'ezored.linux_app.files__config__target_linuxdot_py')
+        if options.stdout == True :
+            t.put()
+        if options.save == True :
+            t.save()
+
         t = models.TFiles__targets__linux__verbs__preparedot_py(data_model, 'ezored.linux_app.files__targets__linux__verbs__preparedot_py')
         if options.stdout == True :
             t.put()
@@ -91,12 +97,6 @@ def main():
             t.save()
 
         t = models.TFiles__targets__linux__cmake__CMakeListsdot_txt(data_model, 'ezored.linux_app.files__targets__linux__cmake__CMakeListsdot_txt')
-        if options.stdout == True :
-            t.put()
-        if options.save == True :
-            t.save()
-
-        t = models.TFiles__config__target_linux_py(data_model, 'ezored.linux_app.files__config__target_linux_py')
         if options.stdout == True :
             t.put()
         if options.save == True :
