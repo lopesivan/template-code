@@ -1,0 +1,9 @@
+data:
+  name: configure.ac
+  dir:  out
+  arg:
+    name: DEBUG CORE
+    value: false
+
+
+
