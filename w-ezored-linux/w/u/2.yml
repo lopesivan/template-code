@@ -1,9 +1,4 @@
 data:
-  name: configure.ac
+  name: linux_app
   dir:  out
-  arg:
-    name: gnu args
-    value: false
-
-
 

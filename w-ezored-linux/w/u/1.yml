@@ -1,4 +1,12 @@
 data:
   name: linux_app
   dir:  out
+  project:
+    name: ezored
+    version: 1.0.0
+    build_types: |
+      Debug
+      Release
+
+    arch: x86_64
 
