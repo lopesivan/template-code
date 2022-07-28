@@ -1,8 +1,8 @@
 data:
-  name: linux_app
+  name: linux
   dir:  out
   project:
-    name: ezored
+    name: cabral2
     version: 1.0.0
     build_types: |
       Debug

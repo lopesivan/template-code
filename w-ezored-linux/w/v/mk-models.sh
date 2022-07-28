@@ -291,7 +291,7 @@ exec 4>&1               # stdout duplicado ( FD 4 tem as mesmas caracteristicas
 exec 1>models/t${M}.py  # stdout aponta para `out.txt'
 
 echo file: models/t${M}.py >&4
-FILENAME=$(echo ${M} | sed -e 's=dot_=.=g' -e 's=___=-=g' -e 's=__=/=g')
+FILENAME=$(echo ${M} | sed -e 's=dot_=.=g' -e 's=UNDERscore_=_=g' -e 's=___=-=g' -e 's=__=/=g')
 FILENAME=$(echo ${FILENAME} | sed 's=ezored.=ezored_=g')
 DIR=${FILENAME%/*}
 

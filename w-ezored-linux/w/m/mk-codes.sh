@@ -39,6 +39,7 @@ find $d \
       -e'h;g' \
       -e 's@/@__@g' \
       -e 's@\.@dot_@' \
+      -e 's@-@UNDERscore_@' \
       -e 's/$/.tmpl/' \
       -e 'x; s/^/cp ..\/data\//; G ; s/\n/ /'|
       sh

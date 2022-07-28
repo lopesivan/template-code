@@ -54,6 +54,12 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
+        t = models.TFiles__modules__targetUNDERscore_linux__cmake__moduledot_cmake(data_model, 'ezored.linux_app.files__modules__targetUNDERscore_linux__cmake__moduledot_cmake')
+        if options.stdout == True :
+            t.put()
+        if options.save == True :
+            t.save()
+
         t = models.TFiles__config__target_linuxdot_py(data_model, 'ezored.linux_app.files__config__target_linuxdot_py')
         if options.stdout == True :
             t.put()
