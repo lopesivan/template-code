@@ -1,7 +1,7 @@
 def run(proj_path, target_name, params):
     return {
-        "project_name": "ezored",
-        "version": "1.0.0",
+        "project_name": "${data.project.name}",
+        "version": "${data.project.version}",
         "build_types": ${data.project.build_types.split("\n")[:-1]},
         "archs": [
             {

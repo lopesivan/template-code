@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20.0)
 get_filename_component(CMAKE_SOURCE_REALPATH "\${CMAKE_SOURCE_DIR}/../../../../" REALPATH)
 
 set(PROJECT_CONFIG_NAME
-    "ezored"
+    ""${data.project.name}""
     CACHE STRING "Project Name"
 )
 
@@ -18,12 +18,12 @@ set(PROJECT_TARGET_NAME
 )
 
 set(PROJECT_CONFIG_VERSION
-    "1.0.0"
+    "${data.project.version}"
     CACHE STRING "Version"
 )
 
 set(PROJECT_CONFIG_ARCH
-    "x86_64"
+    "${data.project.arch}"
     CACHE STRING "Architecture"
 )
 
