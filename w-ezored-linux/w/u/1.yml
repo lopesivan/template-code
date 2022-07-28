@@ -9,4 +9,12 @@ data:
       Release
 
     arch: x86_64
-
+    libs:
+      requires: |
+        sqlite3/3.38.5
+        rapidjson/1.1.0
+        poco/1.11.3
+        openssl/1.1.1o
+        sqlitecpp/3.1.1
+        date/3.0.1
+        nlohmann_json/3.9.1
