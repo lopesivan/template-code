@@ -4,14 +4,14 @@ from .sh import Sh
 import sys
 
 
-class TFiles__modules__targetUNDERscore_linux__cmake__moduledot_cmake(Factory):
+class TFiles__modules__target___linux__cmake__moduledot_cmake(Factory):
     """Classe de template."""
     def __init__(self, data_model, template_name):
 
         Factory.__init__(self, template_name)
         self.data_model = data_model
         self.tmpl.data = data_model['data']
-        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "files/modules/target_linux/cmake/module.cmake".replace("linux", self.tmpl.data['name']))
+        self.tmpl.name = "%s/%s" %(self.tmpl.data['dir'], "files/modules/target-linux/cmake/module.cmake".replace("linux", self.tmpl.data['name']))
 
     def put(self):
         fileName = "%s" % self.tmpl.name

@@ -54,7 +54,7 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
-        t = models.TFiles__modules__targetUNDERscore_linux__cmake__moduledot_cmake(data_model, 'ezored.linux_app.files__modules__targetUNDERscore_linux__cmake__moduledot_cmake')
+        t = models.TFiles__modules__target___linux__cmake__moduledot_cmake(data_model, 'ezored.linux_app.files__modules__target___linux__cmake__moduledot_cmake')
         if options.stdout == True :
             t.put()
         if options.save == True :
