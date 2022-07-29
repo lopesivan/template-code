@@ -5,17 +5,17 @@ if(PROJECT_TARGET_NAME STREQUAL "${data.name}")
 
     file(GLOB S_FILES_CXX "\${PROJECT_ROOT_PATH}/projects/others/${data.project.name}/src/*.cpp")
 
-    file(GLOB H_FILES_LOGGER_IMPL "\${PROJECT_MODULES_PATH}/logger/implementation/cpp/${data.project.name}/util/Simple*.hpp")
-    file(GLOB S_FILES_LOGGER_IMPL "\${PROJECT_MODULES_PATH}/logger/implementation/cpp/${data.project.name}/util/Simple*.cpp")
+    file(GLOB H_FILES_LOGGER_IMPL "\${PROJECT_MODULES_PATH}/logger/implementation/cpp/${data.project.implementation}/util/Simple*.hpp")
+    file(GLOB S_FILES_LOGGER_IMPL "\${PROJECT_MODULES_PATH}/logger/implementation/cpp/${data.project.implementation}/util/Simple*.cpp")
 
-    file(GLOB H_FILES_HTTP_CLIENT_IMPL "\${PROJECT_MODULES_PATH}/http-client/implementation/cpp/${data.project.name}/net/http/Simple*.hpp")
-    file(GLOB S_FILES_HTTP_CLIENT_IMPL "\${PROJECT_MODULES_PATH}/http-client/implementation/cpp/${data.project.name}/net/http/Simple*.cpp")
+    file(GLOB H_FILES_HTTP_CLIENT_IMPL "\${PROJECT_MODULES_PATH}/http-client/implementation/cpp/${data.project.implementation}/net/http/Simple*.hpp")
+    file(GLOB S_FILES_HTTP_CLIENT_IMPL "\${PROJECT_MODULES_PATH}/http-client/implementation/cpp/${data.project.implementation}/net/http/Simple*.cpp")
 
-    file(GLOB H_FILES_SHARED_DATA_IMPL "\${PROJECT_MODULES_PATH}/shared-data/implementation/cpp/${data.project.name}/data/Simple*.hpp")
-    file(GLOB S_FILES_SHARED_DATA_IMPL "\${PROJECT_MODULES_PATH}/shared-data/implementation/cpp/${data.project.name}/data/Simple*.cpp")
+    file(GLOB H_FILES_SHARED_DATA_IMPL "\${PROJECT_MODULES_PATH}/shared-data/implementation/cpp/${data.project.implementation}/data/Simple*.hpp")
+    file(GLOB S_FILES_SHARED_DATA_IMPL "\${PROJECT_MODULES_PATH}/shared-data/implementation/cpp/${data.project.implementation}/data/Simple*.cpp")
 
-    file(GLOB H_FILES_FILE_HELPER_IMPL "\${PROJECT_MODULES_PATH}/file-helper/implementation/cpp/${data.project.name}/io/Simple*.hpp")
-    file(GLOB S_FILES_FILE_HELPER_IMPL "\${PROJECT_MODULES_PATH}/file-helper/implementation/cpp/${data.project.name}/io/Simple*.cpp")
+    file(GLOB H_FILES_FILE_HELPER_IMPL "\${PROJECT_MODULES_PATH}/file-helper/implementation/cpp/${data.project.implementation}/io/Simple*.hpp")
+    file(GLOB S_FILES_FILE_HELPER_IMPL "\${PROJECT_MODULES_PATH}/file-helper/implementation/cpp/${data.project.implementation}/io/Simple*.cpp")
 
     # header files
     project_add_header_files("\${H_FILES_C}")

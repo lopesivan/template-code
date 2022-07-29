@@ -8,6 +8,7 @@ data:
       Debug
       Release
 
+    implementation: ezored
     arch: x86_64
     libs:
       requires: |
