@@ -2,6 +2,7 @@
 """Criação de arquivos de configuração para ip estático."""
 from abc import ABCMeta, abstractmethod
 
+from ezored.linux_app.rundot_sh import rundot_sh
 from ezored.linux_app.projects__others__ezored__src__maindot_cpp import projects__others__ezored__src__maindot_cpp
 from ezored.linux_app.files__modules__target___linux__cmake__moduledot_cmake import files__modules__target___linux__cmake__moduledot_cmake
 from ezored.linux_app.files__config__target_linuxdot_py import files__config__target_linuxdot_py
@@ -15,6 +16,7 @@ from ezored.linux_app.files__targets__linux__cmake__CMakeListsdot_txt import fil
 
 
 template = {
+    'ezored.linux_app.rundot_sh': rundot_sh(),
     'ezored.linux_app.projects__others__ezored__src__maindot_cpp': projects__others__ezored__src__maindot_cpp(),
     'ezored.linux_app.files__modules__target___linux__cmake__moduledot_cmake': files__modules__target___linux__cmake__moduledot_cmake(),
     'ezored.linux_app.files__config__target_linuxdot_py': files__config__target_linuxdot_py(),
