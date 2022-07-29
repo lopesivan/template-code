@@ -54,6 +54,12 @@ def main():
         #data_model = yaml.load(config_file, Loader=yaml.FullLoader)
         config_file.close()
 
+        t = models.TProjects__others__ezored__src__maindot_cpp(data_model, 'ezored.linux_app.projects__others__ezored__src__maindot_cpp')
+        if options.stdout == True :
+            t.put()
+        if options.save == True :
+            t.save()
+
         t = models.TFiles__modules__target___linux__cmake__moduledot_cmake(data_model, 'ezored.linux_app.files__modules__target___linux__cmake__moduledot_cmake')
         if options.stdout == True :
             t.put()
